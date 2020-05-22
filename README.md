@@ -1,6 +1,6 @@
-# skeleton
+# bday
 
-A Skeleton App for Flutter projects.
+A bday App for Flutter projects.
 
 ## Getting Started
 
