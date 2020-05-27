@@ -1,13 +1,14 @@
 import 'package:bday/core/model/person.dart';
 import 'package:bday/extensions/extensions.dart';
 import 'package:bday/viewmodels/main_model.dart';
+import 'package:bday/viewmodels/people_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'animated_text_form_field.dart';
 
 class InputPerson extends StatefulWidget {
-  final MainModel model;
+  final PeopleModel model;
 
   const InputPerson({Key key, this.model}) : super(key: key);
 

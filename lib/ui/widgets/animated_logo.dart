@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AnimatedLogo extends StatefulWidget {
   @override
@@ -40,6 +41,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
   @override
   void initState() {
     super.initState();
+
     _animationController = AnimationController(
       lowerBound: -0.08,
       upperBound: 0.08,
@@ -113,10 +115,13 @@ class _AnimatedLogoState extends State<AnimatedLogo>
 
   @override
   Widget build(BuildContext context) {
+    var _textStyle =
+        GoogleFonts.montserrat(fontWeight: FontWeight.w900, fontSize: 33);
+
     return Container(
       child: Column(
         children: <Widget>[
-          Container(
+/*          Container(
             width: 20,
             height: 20,
             child: RotationTransition(
@@ -126,7 +131,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
                     .evaluate(AlwaysStoppedAnimation(_colorController.value))),
               ),
             ),
-          ),
+          ),*/
           Image.asset(
             'assets/images/cake.png',
             height: 70,
@@ -145,8 +150,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
                     position: _offsetAnimation1,
                     child: Text(
                       "B",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 33),
+                      style: _textStyle,
                     )),
               ),
               Container(
@@ -159,8 +163,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
                     position: _offsetAnimation2,
                     child: Text(
                       "D",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 33),
+                      style: _textStyle,
                     )),
               ),
               Container(
@@ -173,8 +176,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
                     position: _offsetAnimation3,
                     child: Text(
                       "A",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 33),
+                      style: _textStyle,
                     )),
               ),
               Container(
@@ -187,8 +189,7 @@ class _AnimatedLogoState extends State<AnimatedLogo>
                     position: _offsetAnimation4,
                     child: Text(
                       "Y",
-                      style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 33),
+                      style: _textStyle,
                     )),
               ),
             ],

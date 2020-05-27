@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:bday/viewmodels/base_model.dart';
 import 'package:bday/viewmodels/splash_model.dart';
@@ -16,6 +17,8 @@ class BaseView<T extends BaseModel> extends StatefulWidget {
   _BaseViewState<T> createState() => _BaseViewState<T>();
 }
 
+ProgressDialog progressDialog;
+
 class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
   T model = locator<T>();
 
@@ -29,8 +32,8 @@ class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<T>(
-        create: (context) => model,
+    return ChangeNotifierProvider<T>.value(
+        value: model,
         child: Consumer<T>(builder: widget.builder));
   }
 }

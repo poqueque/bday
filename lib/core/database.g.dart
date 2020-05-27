@@ -43,7 +43,7 @@ class _$AppDatabaseBuilder {
   /// Creates the database and initializes it.
   Future<AppDatabase> build() async {
     final path = name != null
-        ? join(await sqflite.getDatabasesPath(), name)
+        ? await sqfliteDatabaseFactory.getDatabasePath(name)
         : ':memory:';
     final database = _$AppDatabase();
     database.database = await database.open(
@@ -64,8 +64,7 @@ class _$AppDatabase extends AppDatabase {
 
   Future<sqflite.Database> open(String path, List<Migration> migrations,
       [Callback callback]) async {
-    return sqflite.openDatabase(
-      path,
+    final databaseOptions = sqflite.OpenDatabaseOptions(
       version: 1,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
@@ -86,6 +85,7 @@ class _$AppDatabase extends AppDatabase {
         await callback?.onCreate?.call(database, version);
       },
     );
+    return sqfliteDatabaseFactory.openDatabase(path, options: databaseOptions);
   }
 
   @override
@@ -133,12 +133,14 @@ class _$PersonDao extends PersonDao {
   @override
   Stream<Person> findPersonByName(int name) {
     return _queryAdapter.queryStream('SELECT * FROM Person WHERE name = ?',
-        arguments: <dynamic>[name], tableName: 'Person', mapper: _personMapper);
+        arguments: <dynamic>[name],
+        queryableName: 'Person',
+        isView: false,
+        mapper: _personMapper);
   }
 
   @override
   Future<void> insertPerson(Person person) async {
-    await _personInsertionAdapter.insert(
-        person, sqflite.ConflictAlgorithm.abort);
+    await _personInsertionAdapter.insert(person, OnConflictStrategy.abort);
   }
 }

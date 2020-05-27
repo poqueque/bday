@@ -8,14 +8,6 @@ import '../locator.dart';
 import 'base_model.dart';
 
 class SplashModel extends BaseModel {
-  String _status = "Loading...";
-
-  String get status => _status;
-
-  set status(String newStatus) {
-    _status = newStatus;
-    notifyListeners();
-  }
 
   PeopleProvider peopleProvider = locator<PeopleProvider>();
   DatabaseProvider databaseProvider = locator<DatabaseProvider>();

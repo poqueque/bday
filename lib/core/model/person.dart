@@ -76,6 +76,11 @@ class Person {
     var daysLeft = b.difference(DateUtils.today()).inDays;
     return Birthday(this, BirthdayType.years, b.year - this.birthday.year, daysLeft);
   }
+
+  @override
+  String toString() {
+    return "$name [$contactId] $day/$month/$year";
+  }
 }
 
 @dao
