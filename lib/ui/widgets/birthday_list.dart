@@ -1,6 +1,6 @@
-import 'package:bday/ui/widgets/MarkdownText.dart';
 import 'package:bday/viewmodels/main_model.dart';
 import 'package:flutter/material.dart';
+import 'package:markup_text/markup_text.dart';
 
 import 'Space.dart';
 import 'birthday_item.dart';
@@ -23,7 +23,7 @@ class BirthdayList extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Space(),
-                MarkdownText("Select *People* menu and fill them"),
+                MarkupText("Select (b)People(/b) menu and fill them"),
               ],
             ),
           )

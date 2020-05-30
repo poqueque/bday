@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:bday/core/model/person.dart';
 import 'package:bday/providers/database_provider.dart';
 import 'package:bday/providers/people.dart';
 

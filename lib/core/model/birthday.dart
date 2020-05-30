@@ -1,5 +1,4 @@
 import 'package:bday/core/model/person.dart';
-import 'package:floor/floor.dart';
 
 enum BirthdayType { days, months, years }
 

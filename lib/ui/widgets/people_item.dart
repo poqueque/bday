@@ -1,8 +1,5 @@
-import 'package:bday/core/model/birthday.dart';
 import 'package:bday/core/model/person.dart';
 import 'package:flutter/material.dart';
-
-import '../../extensions/extensions.dart';
 
 class PeopleItem extends StatelessWidget {
   final Person person;

@@ -1,7 +1,7 @@
-import 'package:bday/ui/widgets/MarkdownText.dart';
 import 'package:bday/ui/widgets/people_item.dart';
 import 'package:bday/viewmodels/people_model.dart';
 import 'package:flutter/material.dart';
+import 'package:markup_text/markup_text.dart';
 
 import 'Space.dart';
 
@@ -24,7 +24,7 @@ class PeopleList extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Space(),
-                  MarkdownText("Click the *+ button* to add people",
+                  MarkupText("Click the (b)+ button(/b) to add people",
                       textAlign: TextAlign.center),
                 ],
               ),

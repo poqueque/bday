@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
 import 'package:bday/viewmodels/base_model.dart';
-import 'package:bday/viewmodels/splash_model.dart';
 
 import '../../locator.dart';
 

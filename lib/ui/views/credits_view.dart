@@ -1,7 +1,8 @@
-import 'package:bday/ui/widgets/MarkdownText.dart';
 import 'package:bday/ui/widgets/Space.dart';
+import 'package:bday/ui/widgets/animated_logo.dart';
 import 'package:bday/ui/widgets/app_drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:markup_text/markup_text.dart';
 
 class CreditsView extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -19,13 +20,21 @@ class CreditsView extends StatelessWidget {
             child: Column(
               children: <Widget>[
                 Space(size: 36),
-                MarkdownText(
-                  "Icons made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/)",
+                AnimatedLogo(),
+                Space(),
+                MarkupText(
+                  "This app is made in (b)Flutter(/b) by (a http://eduardcarreras.net)Eduard Carreras(/a). You can hire him on (a https://www.toptal.com/resume/eduard-carreras#connect-exclusively-masterly-architects  )Toptal(/a) platform",
                 ),
                 Space(),
-                MarkdownText(
-                  "Navigation side menu from *Damodar Lohani* and his amazing app [Flutter UI Challenges](https://play.google.com/store/apps/details?id=com.popupbits.flutteruichallenges)"
+                MarkupText(
+                  "Icons made by (a https://www.flaticon.com/authors/freepik)Freepik(/a) from (a https://www.flaticon.com/)www.flaticon.com(/a)",
                 ),
+                Space(),
+                MarkupText(
+                    "Navigation side menu from (b)Damodar Lohani(/b) and his amazing app (a https://play.google.com/store/apps/details?id=com.popupbits.flutteruichallenges)Flutter UI Challenges(/a)"),
+                Space(),
+                MarkupText(
+                    "This is (b)bold(/b) test (a http://flutter.dev)with a first link(/a) and a simple (u)underlined(/u) text and (a http://pub.dev)with a second (i)italic(/i) link(/a)"),
                 Space(),
               ],
             ),

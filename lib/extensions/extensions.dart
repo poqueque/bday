@@ -1,7 +1,5 @@
 import 'dart:core';
 
-import 'package:bday/core/model/birthday.dart';
-import 'package:bday/core/model/person.dart';
 import 'package:intl/intl.dart';
 
 extension NumberParsing on String {

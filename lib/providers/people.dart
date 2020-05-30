@@ -24,7 +24,7 @@ class PeopleProvider with ChangeNotifier {
     try {
       databaseProvider.dao.insertPerson(person);
       _people.add(person);
-    } on Exception catch (e) {
+    } on Exception {
       debugPrint("Error inserting on DB: $person");
     }
   }
