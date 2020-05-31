@@ -1,4 +1,5 @@
 import 'package:bday/ui/views/credits_view.dart';
+import 'package:bday/ui/views/import_view.dart';
 import 'package:flutter/material.dart';
 
 import 'ui/views/add_people_view.dart';
@@ -12,6 +13,7 @@ class Routes {
   static const String Main = '/main';
   static const String People = '/people';
   static const String AddPeople = '/add_people';
+  static const String Import = '/import';
   static const String Credits = '/credits';
 
 
@@ -21,6 +23,7 @@ class Routes {
       Routes.Main: (context) => MainView(),
       Routes.People: (context) => PeopleView(),
       Routes.AddPeople: (context) => AddPeopleView(),
+      Routes.Import: (context) => ImportView(),
       Routes.Credits: (context) => CreditsView(),
     };
   }

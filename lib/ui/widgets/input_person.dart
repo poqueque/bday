@@ -1,10 +1,10 @@
 import 'package:bday/core/model/person.dart';
 import 'package:bday/extensions/extensions.dart';
+import 'package:bday/ui/utils/app_icons.dart';
 import 'package:bday/viewmodels/people_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
-import 'animated_text_form_field.dart';
+import 'package:get/get.dart';
 
 class InputPerson extends StatefulWidget {
   final PeopleModel model;
@@ -18,59 +18,120 @@ class InputPerson extends StatefulWidget {
 class _InputPersonState extends State<InputPerson> {
   DateTime selectedDate;
   TextEditingController controller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  bool _isValid = true;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: AnimatedTextFormField(
-                labelText: "Name",
-                successText: "Name Validated Successfully",
-                validator: (value) {
-                  if (value.length < 3) return "Enter at least 3 text";
-                  return null;
-                },
-                inputIcon: Icon(Icons.person),
-                controller: controller,
-              )),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              child: Center(
-                child: Text(
-                  selectedDate?.toDateString() ?? "Pick the Birthday Date",
+      child: Form(
+        key: _formKey,
+        onChanged: (){
+          final isValid = _formKey.currentState.validate();
+          if (_isValid != isValid) {
+            setState(() {
+              _isValid = isValid;
+            });
+          }
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
                   style: TextStyle(fontSize: 30),
-                ),
+                  validator: (value) {
+                    value = value.trim();
+                    if (value.length < 3) return "Enter at least 3 text";
+                    if (widget.model.personExists(value)) return "$value already exists";
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    labelText: "Name",
+                    labelStyle: TextStyle(fontSize: 30),
+                    prefixIcon: AppIcons.person,
+                  ),
+                  controller: controller,
+                )),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.asset("assets/images/calendar.png",
+                        width: 42, height: 42),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: (selectedDate != null)
+                        ? Row(
+                            children: <Widget>[
+                              Text(selectedDate.toDateString()),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ButtonTheme(
+                                  height: 20.0,
+                                  minWidth: 20.0,
+                                  child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(24.0),
+                                    ),
+                                    color: Colors.blue,
+                                    child: Text("Change"),
+                                    onPressed: _pickDate,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : RaisedButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24.0),
+                                side: BorderSide(color: Colors.blue)),
+                            color: Colors.blue,
+                            child: Text("Pick Birthday Date"),
+                            onPressed: _pickDate,
+                          ),
+                  ),
+                ],
               ),
-              onTap: () async {
-                selectedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateUtils.today(),
-                    firstDate: DateTime(1900),
-                    lastDate: DateUtils.today());
-                setState(() {});
-              },
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: RaisedButton(
-              child: Text("Add"),
-              onPressed: () {
-                widget.model.addPerson(Person.withRandomId(controller.text, selectedDate));
-                controller.text = "";
-                selectedDate = null;
-                widget.model.clickedCentreFAB = false;
-              },
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0),
+                ),
+                color: Colors.blue,
+                child: Text("Add"),
+                onPressed: (selectedDate != null && _isValid)
+                    ? () {
+                        widget.model.addPerson(
+                            Person.withRandomId(controller.text, selectedDate));
+                        controller.text = "";
+                        selectedDate = null;
+                        widget.model.clickedCentreFAB = false;
+                        Get.back();
+                      }
+                    : null,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  _pickDate() async {
+    selectedDate = await showDatePicker(
+      context: context,
+      initialDate: DateUtils.today(),
+      firstDate: DateTime(1900),
+      lastDate: DateUtils.today(),
+    );
+    setState(() {});
   }
 }

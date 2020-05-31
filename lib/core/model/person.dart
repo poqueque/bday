@@ -8,7 +8,8 @@ import 'birthday.dart';
 
 @entity
 class Person {
-  static List<int> thresholds = [for (var i = 0; i < 10; i += 1) i * 10] +
+  static List<int> thresholds = [for (var i = 1; i < 10; i += 1) i] +
+      [for (var i = 1; i < 10; i += 1) i * 10] +
       [for (var i = 1; i < 10; i += 1) i * 100] +
       [for (var i = 1; i < 10; i += 1) i * 1000] +
       [for (var i = 1; i < 10; i += 1) i * 10000] +

@@ -2,8 +2,10 @@ import 'package:bday/ui/widgets/app_drawer.dart';
 import 'package:bday/ui/widgets/people_list.dart';
 import 'package:bday/viewmodels/people_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../routes.dart';
+import 'add_people_view.dart';
 import 'base_view.dart';
 
 class PeopleView extends StatefulWidget {
@@ -34,7 +36,7 @@ class _PeopleViewState extends State<PeopleView> {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                Navigator.pushNamed(context, Routes.AddPeople);
+                Get.to(AddPeopleView());
               },
               child: Container(
                 margin: EdgeInsets.all(15.0),

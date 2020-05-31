@@ -7,6 +7,7 @@ class AppIcons {
   static Image mail = Image.asset("assets/images/mail.png", width: _iconSize, height: _iconSize);
   static Image card = Image.asset("assets/images/card.png", width: _iconSize, height: _iconSize);
   static Image message = Image.asset("assets/images/mail.png", width: _iconSize, height: _iconSize);
+  static Image import = Image.asset("assets/images/sparkler.png", width: _iconSize, height: _iconSize);
   static Image notifications = Image.asset("assets/images/party_horn.png", width: _iconSize, height: _iconSize);
   static Image settings = Image.asset("assets/images/disco_ball.png", width: _iconSize, height: _iconSize);
 }

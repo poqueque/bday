@@ -23,13 +23,13 @@ class _AddPeopleViewState extends State<AddPeopleView> {
           return Scaffold(
             key: scaffoldKey,
             extendBody: true,
-            backgroundColor: Colors.blue,
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Hero(
                   tag: "peopleHeroTag",
-                  child: InputPerson(model: model),
+                  child: Material(
+                      child: InputPerson(model: model)),
                 ),
               ],
             ),

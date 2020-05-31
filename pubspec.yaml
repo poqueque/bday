@@ -25,7 +25,9 @@ dependencies:
   progress_dialog: ^1.2.3
   permission_handler: ^5.0.0+hotfix.8
   url_launcher: ^5.4.10
-  markup_text: ^0.1.0
+  markup_text: ^0.2.0
+  get: ^2.7.1
+  package_info: ^0.4.0+18
 
 dev_dependencies:
   flutter_test:

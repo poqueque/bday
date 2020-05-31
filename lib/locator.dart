@@ -1,4 +1,5 @@
 import 'package:bday/providers/database_provider.dart';
+import 'package:bday/viewmodels/import_model.dart';
 import 'package:bday/viewmodels/people_model.dart';
 import 'package:get_it/get_it.dart';
 import 'package:bday/providers/people.dart';
@@ -13,6 +14,7 @@ void setup() {
   locator.registerLazySingleton(() => SplashModel());
   locator.registerLazySingleton(() => MainModel());
   locator.registerLazySingleton(() => PeopleModel());
+  locator.registerLazySingleton(() => ImportModel());
 
   locator.registerLazySingleton(() => PeopleProvider());
 

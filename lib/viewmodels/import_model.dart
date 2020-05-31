@@ -7,27 +7,14 @@ import 'package:permission_handler/permission_handler.dart';
 import '../locator.dart';
 import 'base_model.dart';
 
-class PeopleModel extends BaseModel {
+class ImportModel extends BaseModel {
 
   List<Person> get people => peopleProvider.people;
 
-  bool _clickedCentreFAB = false;
-
-  bool get clickedCentreFAB => _clickedCentreFAB;
-
-  set clickedCentreFAB(bool value) {
-    _clickedCentreFAB = value;
-    notifyListeners();
-  }
-
-  void addPerson(Person person) async {
-    await peopleProvider.addPerson(person);
+  void addPerson(Person person) {
+    peopleProvider.addPerson(person);
     peopleProvider.calculate();
     notifyListeners();
-  }
-
-  bool personExists(String value) {
-    return (people.firstWhere((person) => (person.name == value), orElse: () => null) != null);
   }
 
   Future<void> readContacts() async {
@@ -62,5 +49,4 @@ class PeopleModel extends BaseModel {
   }
 
   PeopleProvider peopleProvider = locator<PeopleProvider>();
-
 }

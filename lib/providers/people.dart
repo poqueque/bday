@@ -1,6 +1,7 @@
 import 'package:bday/core/model/birthday.dart';
 import 'package:bday/core/model/person.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get.dart';
 
 import '../locator.dart';
 import 'database_provider.dart';
@@ -20,11 +21,12 @@ class PeopleProvider with ChangeNotifier {
     return _people.length;
   }
 
-  void addPerson(Person person) {
+  Future<void> addPerson(Person person) async {
     try {
-      databaseProvider.dao.insertPerson(person);
+      await databaseProvider.dao.insertPerson(person);
       _people.add(person);
-    } on Exception {
+    } on Exception catch (e){
+      Get.snackbar("Error","Error adding person ${person.name}");
       debugPrint("Error inserting on DB: $person");
     }
   }

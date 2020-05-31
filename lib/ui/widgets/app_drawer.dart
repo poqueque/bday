@@ -1,5 +1,10 @@
 import 'package:bday/ui/utils/app_icons.dart';
+import 'package:bday/ui/views/credits_view.dart';
+import 'package:bday/ui/views/import_view.dart';
+import 'package:bday/ui/views/main_view.dart';
+import 'package:bday/ui/views/people_view.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../routes.dart';
 import 'animated_logo.dart';
@@ -41,22 +46,21 @@ class AppDrawer extends StatelessWidget {
                     child: AnimatedLogo(),
                   ),
                   SizedBox(height: 30.0),
-                  DrawerRow(AppIcons.birthday, "Birthdays", Routes.Main),
+                  DrawerRow(AppIcons.birthday, "Birthdays", MainView()),
                   Divider(color: divider),
-                  DrawerRow(AppIcons.person, "People", Routes.People),
+                  DrawerRow(AppIcons.person, "People", PeopleView()),
                   Divider(color: divider),
-                  DrawerRow(AppIcons.message, "Messages", Routes.Main,
-                      showBadge: true),
+                  DrawerRow(AppIcons.import, "Import", ImportView()),
                   Divider(color: divider),
                   DrawerRow(
-                      AppIcons.notifications, "Notifications", Routes.Main,
+                      AppIcons.notifications, "Notifications", MainView(),
                       showBadge: true),
                   Divider(color: divider),
-                  DrawerRow(AppIcons.settings, "Settings", Routes.Main),
+                  DrawerRow(AppIcons.settings, "Settings", MainView()),
                   Divider(color: divider),
-                  DrawerRow(AppIcons.mail, "Contact us", Routes.Main),
+                  DrawerRow(AppIcons.mail, "Contact us", MainView()),
                   Divider(color: divider),
-                  DrawerRow(AppIcons.card, "Credits", Routes.Credits),
+                  DrawerRow(AppIcons.card, "Credits", CreditsView()),
                   Divider(color: divider),
                 ],
               ),
@@ -71,12 +75,12 @@ class AppDrawer extends StatelessWidget {
 class DrawerRow extends StatelessWidget {
   final Image image;
   final String title;
-  final String route;
+  final Widget screen;
   final bool showBadge;
 
   final Color active = Colors.grey.shade800;
 
-  DrawerRow(this.image, this.title, this.route, {this.showBadge = false});
+  DrawerRow(this.image, this.title, this.screen, {this.showBadge = false});
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +88,10 @@ class DrawerRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 5.0),
       child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: () {
-          Navigator.pop(context);
-          Navigator.pushReplacementNamed(context, route);
+          Get.back();
+          Get.off(screen);
         },
         child: Row(children: [
           image,

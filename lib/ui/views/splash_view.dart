@@ -1,7 +1,9 @@
+import 'package:bday/ui/views/main_view.dart';
 import 'package:bday/ui/widgets/Space.dart';
 import 'package:bday/ui/widgets/animated_logo.dart';
 import 'package:bday/viewmodels/splash_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../routes.dart';
@@ -15,7 +17,7 @@ class SplashView extends StatefulWidget {
 class _SplashViewState extends State<SplashView> {
   void workflow(SplashModel model) async {
     bool logged = await model.workflow();
-    if (logged) Navigator.pushReplacementNamed(context, Routes.Main);
+    if (logged) Get.off(MainView());
   }
 
   @override
