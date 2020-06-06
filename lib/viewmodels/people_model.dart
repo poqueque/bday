@@ -26,39 +26,19 @@ class PeopleModel extends BaseModel {
     notifyListeners();
   }
 
-  bool personExists(String value) {
-    return (people.firstWhere((person) => (person.name == value), orElse: () => null) != null);
+  void updatePerson(Person person, String newName, DateTime newBirthday) async {
+    person.name = newName;
+    person.year = newBirthday.year;
+    person.month = newBirthday.month;
+    person.day = newBirthday.day;
+
+    await peopleProvider.updatePerson(person);
+    peopleProvider.calculate();
+    notifyListeners();
   }
 
-  Future<void> readContacts() async {
-    state = ViewState.Busy;
-    notifyListeners();
-    status = "Reading contacts";
-    //Ask for permissions
-    var permissionStatus = await Permission.contacts.status;
-    if (permissionStatus.isUndetermined) {
-      // We didn't ask for permission yet.
-    }
-
-    if (await Permission.contacts.request().isGranted) {
-      // Get all contacts on device
-      Iterable<Contact> contacts = await ContactsService.getContacts(withThumbnails: false);
-      contacts.forEach((contact) {
-        if (contact.birthday != null) {
-          Person person = Person.fromBirthday(
-              contact.displayName, contact.identifier, contact.birthday);
-          addPerson(person);
-          debugPrint("Added contact: $person");
-        }
-      });
-      await Future.delayed(Duration(seconds: 2));
-      //Add Birthdays
-      state = ViewState.Idle;
-    } else {
-      status = "You need to grant permissions to read contacts";
-      await Future.delayed(Duration(seconds: 2));
-    }
-    notifyListeners();
+  bool personExists(String value) {
+    return (people.firstWhere((person) => (person.name == value), orElse: () => null) != null);
   }
 
   PeopleProvider peopleProvider = locator<PeopleProvider>();

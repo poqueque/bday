@@ -129,7 +129,7 @@ class DrawerRow extends StatelessWidget {
     );
   }
 }
-
+/*
 class DrawerMenu extends StatelessWidget {
 
   final GlobalKey<ScaffoldState> scaffoldKey;
@@ -155,4 +155,4 @@ class DrawerMenu extends StatelessWidget {
     );
   }
 }
-
+*/

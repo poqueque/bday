@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
       child: GetMaterialApp(
         title: 'Flutter bday App',
         theme: ThemeData(
-            primarySwatch: Colors.red,
+            primarySwatch: Colors.blueGrey,
             primaryTextTheme: GoogleFonts.montserratTextTheme(
               Theme.of(context).primaryTextTheme,
             ),

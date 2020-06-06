@@ -15,18 +15,23 @@ class Person {
       [for (var i = 1; i < 10; i += 1) i * 10000] +
       [for (var i = 1; i < 10; i += 1) i * 10000];
 
+  static const int MANUAL = 0;
+  static const int CONTACTS = 1;
+  static const int FACEBOOK = 2;
+
   @primaryKey
+  String id;
   String name;
-  String contactId;
   int year;
   int month;
   int day;
+  int origin;
 
   DateTime get birthday => DateTime(year, month, day);
 
-  Person(this.name, this.contactId, this.year, this.month, this.day);
+  Person(this.name, this.id, this.year, this.month, this.day);
 
-  Person.fromBirthday(this.name, this.contactId, DateTime birthday){
+  Person.fromBirthday(this.name, this.id, DateTime birthday){
     year = birthday.year;
     month = birthday.month;
     day = birthday.day;
@@ -36,7 +41,8 @@ class Person {
     year = birthday.year;
     month = birthday.month;
     day = birthday.day;
-    contactId = Random().nextInt(100000000).toString();
+    origin = Person.MANUAL;
+    id = Random().nextInt(100000000).toString();
   }
 
   static getRandom() => Person.fromBirthday("${RandomPeople.name()} ${RandomPeople.surname()}",
@@ -45,7 +51,7 @@ class Person {
   Birthday nextDayEvent() {
     var days = birthday.days();
     for (var value in thresholds) {
-      if (value > days)
+      if (value >= days)
         return Birthday(this, BirthdayType.days, value, value - days);
     }
     return null;
@@ -80,7 +86,7 @@ class Person {
 
   @override
   String toString() {
-    return "$name [$contactId] $day/$month/$year";
+    return "$name [$id] $day/$month/$year";
   }
 }
 
@@ -94,4 +100,7 @@ abstract class PersonDao {
 
   @insert
   Future<void> insertPerson(Person person);
+
+  @update
+  Future<void> updatePerson(Person person);
 }

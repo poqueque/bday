@@ -31,6 +31,16 @@ class PeopleProvider with ChangeNotifier {
     }
   }
 
+  Future<void> updatePerson(Person person) async {
+    try {
+      await databaseProvider.dao.updatePerson(person);
+      _people.add(person);
+    } on Exception catch (e){
+      Get.snackbar("Error","Error adding person ${person.name}");
+      debugPrint("Error inserting on DB: $person");
+    }
+  }
+
   void calculate() {
     _birthdays.clear();
     _people.forEach((person) {

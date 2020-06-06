@@ -35,6 +35,7 @@ class _ImportViewState extends State<ImportView> {
           return Scaffold(
             key: scaffoldKey,
             extendBody: true,
+            appBar: AppBar(title: Text("Import")),
             drawer: AppDrawer(),
             body: Stack(
               children: <Widget>[
@@ -42,7 +43,6 @@ class _ImportViewState extends State<ImportView> {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      Space(size: 36),
                       MarkupText("You can easily import the Birthday dates from your"
                           " (b)contacts(/b) ((i)it will ask for permissions(/i)) and from"
                           " (b)Facebook(/b) ((i)you'll need to log into facebook and also"
@@ -60,7 +60,6 @@ class _ImportViewState extends State<ImportView> {
                     ],
                   ),
                 ),
-                DrawerMenu(scaffoldKey),
               ],
             ),
           );

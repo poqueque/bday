@@ -80,7 +80,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Person` (`name` TEXT, `contactId` TEXT, `year` INTEGER, `month` INTEGER, `day` INTEGER, PRIMARY KEY (`name`))');
+            'CREATE TABLE IF NOT EXISTS `Person` (`id` TEXT, `name` TEXT, `year` INTEGER, `month` INTEGER, `day` INTEGER, `origin` INTEGER, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -101,11 +101,25 @@ class _$PersonDao extends PersonDao {
             database,
             'Person',
             (Person item) => <String, dynamic>{
+                  'id': item.id,
                   'name': item.name,
-                  'contactId': item.contactId,
                   'year': item.year,
                   'month': item.month,
-                  'day': item.day
+                  'day': item.day,
+                  'origin': item.origin
+                },
+            changeListener),
+        _personUpdateAdapter = UpdateAdapter(
+            database,
+            'Person',
+            ['id'],
+            (Person item) => <String, dynamic>{
+                  'id': item.id,
+                  'name': item.name,
+                  'year': item.year,
+                  'month': item.month,
+                  'day': item.day,
+                  'origin': item.origin
                 },
             changeListener);
 
@@ -117,12 +131,14 @@ class _$PersonDao extends PersonDao {
 
   static final _personMapper = (Map<String, dynamic> row) => Person(
       row['name'] as String,
-      row['contactId'] as String,
+      row['id'] as String,
       row['year'] as int,
       row['month'] as int,
       row['day'] as int);
 
   final InsertionAdapter<Person> _personInsertionAdapter;
+
+  final UpdateAdapter<Person> _personUpdateAdapter;
 
   @override
   Future<List<Person>> findAllPersons() async {
@@ -142,5 +158,10 @@ class _$PersonDao extends PersonDao {
   @override
   Future<void> insertPerson(Person person) async {
     await _personInsertionAdapter.insert(person, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updatePerson(Person person) async {
+    await _personUpdateAdapter.update(person, OnConflictStrategy.abort);
   }
 }

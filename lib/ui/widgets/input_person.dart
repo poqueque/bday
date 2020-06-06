@@ -1,6 +1,5 @@
 import 'package:bday/core/model/person.dart';
 import 'package:bday/extensions/extensions.dart';
-import 'package:bday/ui/utils/app_icons.dart';
 import 'package:bday/viewmodels/people_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -8,8 +7,9 @@ import 'package:get/get.dart';
 
 class InputPerson extends StatefulWidget {
   final PeopleModel model;
+  final Person person;
 
-  const InputPerson({Key key, this.model}) : super(key: key);
+  const InputPerson({Key key, this.model, this.person}) : super(key: key);
 
   @override
   _InputPersonState createState() => _InputPersonState();
@@ -22,11 +22,20 @@ class _InputPersonState extends State<InputPerson> {
   bool _isValid = true;
 
   @override
+  void initState() {
+    super.initState();
+    if (widget.person != null) {
+      controller.text = widget.person.name;
+      selectedDate = widget.person.birthday;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Form(
         key: _formKey,
-        onChanged: (){
+        onChanged: () {
           final isValid = _formKey.currentState.validate();
           if (_isValid != isValid) {
             setState(() {
@@ -38,23 +47,35 @@ class _InputPersonState extends State<InputPerson> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  style: TextStyle(fontSize: 30),
-                  validator: (value) {
-                    value = value.trim();
-                    if (value.length < 3) return "Enter at least 3 text";
-                    if (widget.model.personExists(value)) return "$value already exists";
-                    return null;
-                  },
-                  decoration: InputDecoration(
-                    labelText: "Name",
-                    labelStyle: TextStyle(fontSize: 30),
-                    prefixIcon: AppIcons.person,
-                  ),
-                  controller: controller,
-                )),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset("assets/images/birthday_girl.png",
+                      width: 42, height: 42),
+                ),
+                Flexible(
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                        style: TextStyle(fontSize: 30),
+                        validator: (value) {
+                          value = value.trim();
+                          if (value.length < 3) return "Enter at least 3 text";
+                          if (value != widget.person.name &&
+                              widget.model.personExists(value))
+                            return "$value already exists";
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                          labelText: "Name",
+                          labelStyle: TextStyle(fontSize: 30),
+                        ),
+                        controller: controller,
+                      )),
+                ),
+              ],
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
@@ -106,11 +127,15 @@ class _InputPersonState extends State<InputPerson> {
                   borderRadius: BorderRadius.circular(24.0),
                 ),
                 color: Colors.blue,
-                child: Text("Add"),
+                child: (widget.person == null) ? Text("Add") : Text("Update"),
                 onPressed: (selectedDate != null && _isValid)
                     ? () {
-                        widget.model.addPerson(
-                            Person.withRandomId(controller.text, selectedDate));
+                        if (widget.person == null)
+                          widget.model.addPerson(Person.withRandomId(
+                              controller.text, selectedDate));
+                        else
+                          widget.model.updatePerson(
+                              widget.person, controller.text, selectedDate);
                         controller.text = "";
                         selectedDate = null;
                         widget.model.clickedCentreFAB = false;
@@ -126,6 +151,7 @@ class _InputPersonState extends State<InputPerson> {
   }
 
   _pickDate() async {
+    FocusScope.of(context).requestFocus(FocusNode());
     selectedDate = await showDatePicker(
       context: context,
       initialDate: DateUtils.today(),

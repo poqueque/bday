@@ -4,7 +4,6 @@ import 'package:bday/viewmodels/people_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../routes.dart';
 import 'add_people_view.dart';
 import 'base_view.dart';
 
@@ -27,11 +26,11 @@ class _PeopleViewState extends State<PeopleView> {
           return Scaffold(
             key: scaffoldKey,
             extendBody: true,
+            appBar: AppBar(title: Text("People")),
             drawer: AppDrawer(),
             body: Stack(
               children: <Widget>[
                 PeopleList(model),
-                DrawerMenu(scaffoldKey),
               ],
             ),
             floatingActionButton: FloatingActionButton(

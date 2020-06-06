@@ -39,53 +39,13 @@ class _MainViewState extends State<MainView> {
           return Scaffold(
             key: scaffoldKey,
             extendBody: true,
+            appBar: AppBar(title: Text("BDay"),),
             drawer: AppDrawer(),
             body: Stack(
               children: <Widget>[
                 BirthdayList(model),
-                /*
-                Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: AnimatedContainer(
-                    duration: Duration(milliseconds: 250),
-                    height: model.clickedCentreFAB
-                        ? MediaQuery.of(context).size.height
-                        : 10.0,
-                    width: model.clickedCentreFAB
-                        ? MediaQuery.of(context).size.height
-                        : 10.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                            model.clickedCentreFAB ? 0.0 : 300.0),
-                        color: Colors.blue),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: InputPerson(
-                        model: model,
-                      ),
-                    ),
-                  ),
-                ),*/
-                DrawerMenu(scaffoldKey),
               ],
             ),
-/*
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                setState(() {
-                  model.clickedCentreFAB = !model.clickedCentreFAB;
-                });
-              },
-              tooltip: "Centre FAB",
-              child: Container(
-                margin: EdgeInsets.all(15.0),
-                child: Icon(Icons.add),
-              ),
-              elevation: 4.0,
-            ),
-*/
           );
         });
   }
