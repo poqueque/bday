@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:markup_text/markup_text.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 
-import '../../routes.dart';
 import 'base_view.dart';
 
 class ImportView extends StatefulWidget {
@@ -43,7 +42,8 @@ class _ImportViewState extends State<ImportView> {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      MarkupText("You can easily import the Birthday dates from your"
+                      MarkupText(
+                          "You can easily import the Birthday dates from your"
                           " (b)contacts(/b) ((i)it will ask for permissions(/i)) and from"
                           " (b)Facebook(/b) ((i)you'll need to log into facebook and also"
                           " grant permissions for getting the Birthday dates(/i))."),

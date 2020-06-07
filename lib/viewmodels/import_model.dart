@@ -8,7 +8,6 @@ import '../locator.dart';
 import 'base_model.dart';
 
 class ImportModel extends BaseModel {
-
   List<Person> get people => peopleProvider.people;
 
   void addPerson(Person person) {
@@ -29,7 +28,8 @@ class ImportModel extends BaseModel {
 
     if (await Permission.contacts.request().isGranted) {
       // Get all contacts on device
-      Iterable<Contact> contacts = await ContactsService.getContacts(withThumbnails: false);
+      Iterable<Contact> contacts =
+          await ContactsService.getContacts(withThumbnails: false);
       contacts.forEach((contact) {
         if (contact.birthday != null) {
           Person person = Person.fromBirthday(

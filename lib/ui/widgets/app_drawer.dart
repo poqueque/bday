@@ -6,7 +6,6 @@ import 'package:bday/ui/views/people_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../routes.dart';
 import 'animated_logo.dart';
 import 'oval_right_clipper.dart';
 
@@ -52,8 +51,7 @@ class AppDrawer extends StatelessWidget {
                   Divider(color: divider),
                   DrawerRow(AppIcons.import, "Import", ImportView()),
                   Divider(color: divider),
-                  DrawerRow(
-                      AppIcons.notifications, "Notifications", MainView(),
+                  DrawerRow(AppIcons.notifications, "Notifications", MainView(),
                       showBadge: true),
                   Divider(color: divider),
                   DrawerRow(AppIcons.settings, "Settings", MainView()),

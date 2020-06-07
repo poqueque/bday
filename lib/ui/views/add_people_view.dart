@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'base_view.dart';
 
 class AddPeopleView extends StatefulWidget {
-
   final Person person;
 
   AddPeopleView({this.person});

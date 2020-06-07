@@ -16,7 +16,6 @@ class Routes {
   static const String Import = '/import';
   static const String Credits = '/credits';
 
-
   static Map<String, WidgetBuilder> getRoutes() {
     return {
       Routes.Splash: (context) => SplashView(),

@@ -13,7 +13,6 @@ extension NumberParsing on String {
 }
 
 extension DateUtils on DateTime {
-
   static DateTime today() {
     DateTime now = DateTime.now();
     return DateTime(now.year, now.month, now.day);
@@ -39,7 +38,6 @@ extension DateUtils on DateTime {
   }
 }
 
-
 extension DaysLeft on int {
   String toWhenHumanReadable() {
     var today = DateUtils.today();
@@ -47,16 +45,11 @@ extension DaysLeft on int {
     var weekDay = DateFormat('EEEE').format(day);
     var longDate = DateFormat.yMMMMEEEEd().format(day);
 
-    if (this == -1)
-      return "Ayer";
-    if (this == 0)
-      return "Hoy";
-    if (this == 1)
-      return "Mañana";
-    if (this == 2)
-      return "Pasado Mañana";
-    if (this < 8)
-      return "El próximo $weekDay";
+    if (this == -1) return "Ayer";
+    if (this == 0) return "Hoy";
+    if (this == 1) return "Mañana";
+    if (this == 2) return "Pasado Mañana";
+    if (this < 8) return "El próximo $weekDay";
     return longDate;
   }
 }

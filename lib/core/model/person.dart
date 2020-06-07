@@ -31,7 +31,7 @@ class Person {
 
   Person(this.name, this.id, this.year, this.month, this.day);
 
-  Person.fromBirthday(this.name, this.id, DateTime birthday){
+  Person.fromBirthday(this.name, this.id, DateTime birthday) {
     year = birthday.year;
     month = birthday.month;
     day = birthday.day;
@@ -45,8 +45,10 @@ class Person {
     id = Random().nextInt(100000000).toString();
   }
 
-  static getRandom() => Person.fromBirthday("${RandomPeople.name()} ${RandomPeople.surname()}",
-      Random().nextInt(100000000).toString(), RandomPeople.birthday());
+  static getRandom() => Person.fromBirthday(
+      "${RandomPeople.name()} ${RandomPeople.surname()}",
+      Random().nextInt(100000000).toString(),
+      RandomPeople.birthday());
 
   Birthday nextDayEvent() {
     var days = birthday.days();
@@ -58,16 +60,16 @@ class Person {
   }
 
   Birthday nextMonthEvent() {
-    var next = DateTime.now().year * 12 + DateTime.now().month - (this.birthday.year * 12 + this.birthday.month);
-    if (this.birthday.day < DateTime.now().day) next ++;
+    var next = DateTime.now().year * 12 +
+        DateTime.now().month -
+        (this.birthday.year * 12 + this.birthday.month);
+    if (this.birthday.day < DateTime.now().day) next++;
 
     for (var value in thresholds) {
       if (value >= next) {
-        var nextDate = DateTime(this.birthday.year+(value~/12), this.birthday.month+(value%12),this.birthday.day);
-        var daysLeft = nextDate
-            .difference(DateUtils
-            .today())
-            .inDays;
+        var nextDate = DateTime(this.birthday.year + (value ~/ 12),
+            this.birthday.month + (value % 12), this.birthday.day);
+        var daysLeft = nextDate.difference(DateUtils.today()).inDays;
         return Birthday(this, BirthdayType.months, value, daysLeft);
       }
     }
@@ -81,7 +83,8 @@ class Person {
       b = DateTime(
           DateTime.now().year + 1, this.birthday.month, this.birthday.day);
     var daysLeft = b.difference(DateUtils.today()).inDays;
-    return Birthday(this, BirthdayType.years, b.year - this.birthday.year, daysLeft);
+    return Birthday(
+        this, BirthdayType.years, b.year - this.birthday.year, daysLeft);
   }
 
   @override

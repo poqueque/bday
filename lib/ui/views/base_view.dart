@@ -1,7 +1,7 @@
+import 'package:bday/viewmodels/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_dialog/progress_dialog.dart';
 import 'package:provider/provider.dart';
-import 'package:bday/viewmodels/base_model.dart';
 
 import '../../locator.dart';
 
@@ -32,7 +32,6 @@ class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<T>.value(
-        value: model,
-        child: Consumer<T>(builder: widget.builder));
+        value: model, child: Consumer<T>(builder: widget.builder));
   }
 }

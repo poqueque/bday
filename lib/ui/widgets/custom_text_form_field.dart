@@ -57,79 +57,79 @@ class CustomTextFormField extends FormField<String> {
         assert(maxLines == null || maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
-        (maxLines == null) || (minLines == null) || (maxLines >= minLines),
-        'minLines can\'t be greater than maxLines',
+          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
+          'minLines can\'t be greater than maxLines',
         ),
         assert(expands != null),
         assert(
-        !expands || (maxLines == null && minLines == null),
-        'minLines and maxLines must be null when expands is true.',
+          !expands || (maxLines == null && minLines == null),
+          'minLines and maxLines must be null when expands is true.',
         ),
         assert(!obscureText || maxLines == 1,
-        'Obscured fields cannot be multiline.'),
+            'Obscured fields cannot be multiline.'),
         assert(maxLength == null || maxLength > 0),
         assert(enableInteractiveSelection != null),
         super(
-        key: key,
-        initialValue:
-        controller != null ? controller.text : (initialValue ?? ''),
-        onSaved: onSaved,
-        validator: validator,
-        autovalidate: autovalidate,
-        enabled: enabled,
-        builder: (FormFieldState<String> field) {
-          final _CTextFormFieldState state = field;
-          final InputDecoration effectiveDecoration = (decoration ??
-              const InputDecoration())
-              .applyDefaults(Theme.of(field.context).inputDecorationTheme);
+          key: key,
+          initialValue:
+              controller != null ? controller.text : (initialValue ?? ''),
+          onSaved: onSaved,
+          validator: validator,
+          autovalidate: autovalidate,
+          enabled: enabled,
+          builder: (FormFieldState<String> field) {
+            final _CTextFormFieldState state = field;
+            final InputDecoration effectiveDecoration = (decoration ??
+                    const InputDecoration())
+                .applyDefaults(Theme.of(field.context).inputDecorationTheme);
 
-          void onChangedHandler(String value) {
-            if (onChanged != null) {
-              onChanged(value);
+            void onChangedHandler(String value) {
+              if (onChanged != null) {
+                onChanged(value);
+              }
+              field.didChange(value);
             }
-            field.didChange(value);
-          }
 
-          return TextField(
-            controller: state._effectiveController,
-            focusNode: focusNode,
-            keyboardType: keyboardType,
-            decoration: effectiveDecoration,
-            textInputAction: textInputAction,
-            style: style,
-            strutStyle: strutStyle,
-            textAlign: textAlign,
-            textAlignVertical: textAlignVertical,
-            textDirection: textDirection,
-            textCapitalization: textCapitalization,
-            autofocus: autofocus,
-            toolbarOptions: toolbarOptions,
-            readOnly: readOnly,
-            showCursor: showCursor,
-            obscureText: obscureText,
-            autocorrect: autocorrect,
-            enableSuggestions: enableSuggestions,
-            maxLengthEnforced: maxLengthEnforced,
-            maxLines: maxLines,
-            minLines: minLines,
-            expands: expands,
-            maxLength: maxLength,
-            onChanged: onChangedHandler,
-            onTap: onTap,
-            onEditingComplete: onEditingComplete,
-            onSubmitted: onFieldSubmitted,
-            inputFormatters: inputFormatters,
-            enabled: enabled,
-            cursorWidth: cursorWidth,
-            cursorRadius: cursorRadius,
-            cursorColor: cursorColor,
-            scrollPadding: scrollPadding,
-            keyboardAppearance: keyboardAppearance,
-            enableInteractiveSelection: enableInteractiveSelection,
-            buildCounter: buildCounter,
-          );
-        },
-      );
+            return TextField(
+              controller: state._effectiveController,
+              focusNode: focusNode,
+              keyboardType: keyboardType,
+              decoration: effectiveDecoration,
+              textInputAction: textInputAction,
+              style: style,
+              strutStyle: strutStyle,
+              textAlign: textAlign,
+              textAlignVertical: textAlignVertical,
+              textDirection: textDirection,
+              textCapitalization: textCapitalization,
+              autofocus: autofocus,
+              toolbarOptions: toolbarOptions,
+              readOnly: readOnly,
+              showCursor: showCursor,
+              obscureText: obscureText,
+              autocorrect: autocorrect,
+              enableSuggestions: enableSuggestions,
+              maxLengthEnforced: maxLengthEnforced,
+              maxLines: maxLines,
+              minLines: minLines,
+              expands: expands,
+              maxLength: maxLength,
+              onChanged: onChangedHandler,
+              onTap: onTap,
+              onEditingComplete: onEditingComplete,
+              onSubmitted: onFieldSubmitted,
+              inputFormatters: inputFormatters,
+              enabled: enabled,
+              cursorWidth: cursorWidth,
+              cursorRadius: cursorRadius,
+              cursorColor: cursorColor,
+              scrollPadding: scrollPadding,
+              keyboardAppearance: keyboardAppearance,
+              enableInteractiveSelection: enableInteractiveSelection,
+              buildCounter: buildCounter,
+            );
+          },
+        );
 
   final TextEditingController controller;
 

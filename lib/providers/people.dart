@@ -25,8 +25,8 @@ class PeopleProvider with ChangeNotifier {
     try {
       await databaseProvider.dao.insertPerson(person);
       _people.add(person);
-    } on Exception catch (e){
-      Get.snackbar("Error","Error adding person ${person.name}");
+    } on Exception catch (e) {
+      Get.snackbar("Error", "Error adding person ${person.name}");
       debugPrint("Error inserting on DB: $person");
     }
   }
@@ -35,8 +35,8 @@ class PeopleProvider with ChangeNotifier {
     try {
       await databaseProvider.dao.updatePerson(person);
       _people.add(person);
-    } on Exception catch (e){
-      Get.snackbar("Error","Error adding person ${person.name}");
+    } on Exception catch (e) {
+      Get.snackbar("Error", "Error adding person ${person.name}");
       debugPrint("Error inserting on DB: $person");
     }
   }

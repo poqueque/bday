@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:bday/extensions/extensions.dart';
 
 class RandomPeople {

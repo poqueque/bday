@@ -1,6 +1,5 @@
 import 'package:bday/providers/database_provider.dart';
 import 'package:bday/providers/people.dart';
-import 'package:bday/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,18 +21,19 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<PeopleProvider>(create: (_) => PeopleProvider()),
-        ChangeNotifierProvider<DatabaseProvider>(create: (_) => DatabaseProvider()),
+        ChangeNotifierProvider<DatabaseProvider>(
+            create: (_) => DatabaseProvider()),
       ],
       child: GetMaterialApp(
         title: 'Flutter bday App',
         theme: ThemeData(
-            primarySwatch: Colors.blueGrey,
-            primaryTextTheme: GoogleFonts.montserratTextTheme(
-              Theme.of(context).primaryTextTheme,
-            ),
-            textTheme: GoogleFonts.montserratTextTheme(
-              Theme.of(context).textTheme,
-            ),
+          primarySwatch: Colors.blueGrey,
+          primaryTextTheme: GoogleFonts.montserratTextTheme(
+            Theme.of(context).primaryTextTheme,
+          ),
+          textTheme: GoogleFonts.montserratTextTheme(
+            Theme.of(context).textTheme,
+          ),
           buttonTheme: ButtonThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(24.0),

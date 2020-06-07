@@ -5,7 +5,6 @@ import '../locator.dart';
 import 'base_model.dart';
 
 class SplashModel extends BaseModel {
-
   PeopleProvider peopleProvider = locator<PeopleProvider>();
   DatabaseProvider databaseProvider = locator<DatabaseProvider>();
 

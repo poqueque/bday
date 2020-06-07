@@ -19,27 +19,27 @@ class AnimatedTextFormField extends StatefulWidget {
   final Icon inputIcon;
   final TextEditingController controller;
 
-  const AnimatedTextFormField({
-    Key key,
-    this.validator,
-    this.successIcon = const Icon(
-      Icons.check,
-      color: Colors.white,
-    ),
-    this.errorIcon = const Icon(
-      Icons.warning,
-      color: Colors.white,
-    ),
-    @required this.inputIcon,
-    this.labelText,
-    this.successText,
-    this.suffix = true,
-    this.errorColor = Colors.red,
-    this.successColor = Colors.green,
-    this.backgroundColor = Colors.white,
-    this.labelColor = Colors.grey,
-    this.controller
-  }) : super(key: key);
+  const AnimatedTextFormField(
+      {Key key,
+      this.validator,
+      this.successIcon = const Icon(
+        Icons.check,
+        color: Colors.white,
+      ),
+      this.errorIcon = const Icon(
+        Icons.warning,
+        color: Colors.white,
+      ),
+      @required this.inputIcon,
+      this.labelText,
+      this.successText,
+      this.suffix = true,
+      this.errorColor = Colors.red,
+      this.successColor = Colors.green,
+      this.backgroundColor = Colors.white,
+      this.labelColor = Colors.grey,
+      this.controller})
+      : super(key: key);
 
   @override
   _AnimatedTextFormFieldState createState() => _AnimatedTextFormFieldState();

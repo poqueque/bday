@@ -39,7 +39,9 @@ class _MainViewState extends State<MainView> {
           return Scaffold(
             key: scaffoldKey,
             extendBody: true,
-            appBar: AppBar(title: Text("BDay"),),
+            appBar: AppBar(
+              title: Text("BDay"),
+            ),
             drawer: AppDrawer(),
             body: Stack(
               children: <Widget>[

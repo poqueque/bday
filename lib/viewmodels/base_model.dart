@@ -8,6 +8,7 @@ class BaseModel extends ChangeNotifier {
   String _status = "";
 
   ViewState get state => _state;
+
   String get status => _status;
 
   set state(ViewState viewState) {
